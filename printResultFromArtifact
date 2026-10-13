@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Get result from Build paramByArtifact') {
+            steps {
+                copyArtifacts(
+                    projectName: 'paramByArtifact',
+                    selector: latest(),
+                    filter: 'result.txt'
+                )
+
+                script {
+                    def result = readFile('result.txt').trim()
+                    echo "Received result: ${result}"
+                }
+            }
+        }
+    }
+}
