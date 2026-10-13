@@ -6,7 +6,7 @@ pipeline {
             steps {
                 copyArtifacts(
                     projectName: 'paramByArtifact',
-                    selector: latest(),
+                    selector: lastSuccessful(),
                     filter: 'result.txt'
                 )
 
